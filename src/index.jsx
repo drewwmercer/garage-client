@@ -1,18 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MainView from './components/main-view/main-view';
 
 // Import statement to indicate the need for bundling `./index.scss`
 import './index.scss';
 
 // Main component (will eventually use all the others)
 class MyGarageApplication extends React.Component {
-  render() {
-    return (
-      <div className="my-garage">
-        <div>Welcome to myGarage!</div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <MainView />
+        );
+    }
 }
 
 // Finds the root of the app
