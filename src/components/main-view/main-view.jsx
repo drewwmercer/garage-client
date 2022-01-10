@@ -19,6 +19,11 @@ export class MainView extends React.Component {
                     _id: 2, Nickname: "Anne", Year: "2000-01-01", Model: "F-350", Trim: "Custom", BodyType: {
                         BodyName: "Pickup Truck"
                     }
+                },
+                {
+                    _id: 3, Nickname: "Eleanor", Year: "1967", Model: "Mustang", Trim: "Shelby GT500", BodyType: {
+                        BodyName: "Coupe"
+                    }, ImagePath: "Shelby-GT500-Eleanor.jpeg"
                 }
             ],
             selectedVehicle: null
