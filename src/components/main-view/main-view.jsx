@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { VehicleCard } from '../vehicle-card/vehicle-card';
+
 export class MainView extends React.Component {
 
     constructor() {
@@ -22,22 +24,21 @@ export class MainView extends React.Component {
     }
 
     render() {
-        const vehicles = this.state.vehicles;
-        if (vehicles.length === 0) {
-            return <div className="main-view">The vehicle list is empty.</div>;
-        } else {
-            return (
-                <div className='main-view'>
-                    <div>Mary</div>
-                    <div>Barbara</div>
-                    <div>Lindsey</div>
-                    {vehicles.map((vehicle) => {
-                        return <div key={vehicle._id}>{vehicle.Nickname}</div>;
-                    })}
-                </div>
-            );
-        }
+        // Destructuring the vehicle object with ES6
+        const { vehicles } = this.state;
+
+        if (vehicles.length === 0) return <div className="main-view">The vehicle list is empty.</div>;
+
+        return (
+            <div className='main-view'>
+                <div>Mary</div>
+                <div>Barbara</div>
+                <div>Lindsey</div>
+                {vehicles.map((vehicle) => <VehicleCard key={vehicle._id} vehicle={vehicle} />)}
+            </div>
+        );
     }
 }
+
 
 export default MainView;
