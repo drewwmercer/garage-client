@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { VehicleCard } from '../vehicle-card/vehicle-card';
+import { VehicleView } from '../vehicle-view/vehicle-view';
 
 export class MainView extends React.Component {
 
@@ -19,13 +20,22 @@ export class MainView extends React.Component {
                         BodyName: "Pickup Truck"
                     }
                 }
-            ]
+            ],
+            selectedVehicle: null
         }
+    }
+
+    setSelectedVehicle(newSelectedVehicle) {
+        this.setState({
+            selectedVehicle: newSelectedVehicle
+        });
     }
 
     render() {
         // Destructuring the vehicle object with ES6
-        const { vehicles } = this.state;
+        const { vehicles, selectedVehicle } = this.state;
+
+        if (selectedVehicle) return <VehicleView vehicle={selectedVehicle} />;
 
         if (vehicles.length === 0) return <div className="main-view">The vehicle list is empty.</div>;
 
@@ -34,7 +44,8 @@ export class MainView extends React.Component {
                 <div>Mary</div>
                 <div>Barbara</div>
                 <div>Lindsey</div>
-                {vehicles.map((vehicle) => <VehicleCard key={vehicle._id} vehicle={vehicle} />)}
+                <button onClick={() => { alert('Nice!') }}>Click me!</button>
+                {vehicles.map((vehicle) => <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />)}
             </div>
         );
     }
