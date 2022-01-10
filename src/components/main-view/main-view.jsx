@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 import { VehicleCard } from '../vehicle-card/vehicle-card';
 import { VehicleView } from '../vehicle-view/vehicle-view';
@@ -8,24 +9,8 @@ export class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            vehicles: [
-
-                {
-                    _id: 1, Nickname: "Mary", Year: "1999-01-01", Model: "DB7", Trim: "N/A", BodyType: {
-                        BodyName: "Coupe"
-                    }
-                },
-                {
-                    _id: 2, Nickname: "Anne", Year: "2000-01-01", Model: "F-350", Trim: "Custom", BodyType: {
-                        BodyName: "Pickup Truck"
-                    }
-                },
-                {
-                    _id: 3, Nickname: "Eleanor", Year: "1967", Model: "Mustang", Trim: "Shelby GT500", BodyType: {
-                        BodyName: "Coupe"
-                    }, ImagePath: "Shelby-GT500-Eleanor.jpeg"
-                }
-            ],
+            // Setting vehicles to an empty array
+            vehicles: [],
             selectedVehicle: null
         }
     }
