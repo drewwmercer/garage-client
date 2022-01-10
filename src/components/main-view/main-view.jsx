@@ -35,14 +35,12 @@ export class MainView extends React.Component {
         // Destructuring the vehicle object with ES6
         const { vehicles, selectedVehicle } = this.state;
 
-        if (selectedVehicle) return <VehicleView vehicle={selectedVehicle} />;
-
         if (vehicles.length === 0) return <div className="main-view">The vehicle list is empty.</div>;
 
         return (
             <div className='main-view'>
                 {selectedVehicle
-                    ? <VehicleView vehicle={selectedMovie} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
+                    ? <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
                     : vehicles.map(vehicle => (
                         <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
                     ))

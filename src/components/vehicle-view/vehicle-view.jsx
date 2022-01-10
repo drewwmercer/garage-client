@@ -3,7 +3,7 @@ import React from 'react';
 export class VehicleView extends React.Component {
 
     render() {
-        const { vehicle } = this.props;
+        const { vehicle, onBackClick } = this.props;
 
         return (
             <div className="vehicle-view">
@@ -18,7 +18,7 @@ export class VehicleView extends React.Component {
                     <span className="label">Description: </span>
                     <span className="value">{vehicle.Year} {vehicle.Model}</span>
                 </div>
-
+                <button onClick={() => { onBackClick(null); }}>Back to Garage</button>
             </div>
         );
     }
