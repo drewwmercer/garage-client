@@ -8,7 +8,7 @@ import './index.scss';
 class MyGarageApplication extends React.Component {
   render() {
     return (
-      <div className="my-flix">
+      <div className="my-garage">
         <div>Welcome to myGarage!</div>
       </div>
     );
