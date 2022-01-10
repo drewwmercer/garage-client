@@ -41,11 +41,12 @@ export class MainView extends React.Component {
 
         return (
             <div className='main-view'>
-                <div>Mary</div>
-                <div>Barbara</div>
-                <div>Lindsey</div>
-                <button onClick={() => { alert('Nice!') }}>Click me!</button>
-                {vehicles.map((vehicle) => <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />)}
+                {selectedVehicle
+                    ? <VehicleView vehicle={selectedMovie} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
+                    : vehicles.map(vehicle => (
+                        <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
+                    ))
+                }
             </div>
         );
     }
