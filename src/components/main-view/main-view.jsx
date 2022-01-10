@@ -15,6 +15,18 @@ export class MainView extends React.Component {
         }
     }
 
+    componentDidMount() {
+        axios.get('https://my-garage-application.herokuapp.com/vehicles')
+            .then(response => {
+                this.setState({
+                    vehicles: response.data
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     setSelectedVehicle(newSelectedVehicle) {
         this.setState({
             selectedVehicle: newSelectedVehicle
@@ -25,7 +37,7 @@ export class MainView extends React.Component {
         // Destructuring the vehicle object with ES6
         const { vehicles, selectedVehicle } = this.state;
 
-        if (vehicles.length === 0) return <div className="main-view">The vehicle list is empty.</div>;
+        if (vehicles.length === 0) return <div className="main-view" />;
 
         return (
             <div className='main-view'>
