@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
+import { Link } from "react-router-dom";
 
 export class VehicleView extends React.Component {
 
@@ -20,6 +21,13 @@ export class VehicleView extends React.Component {
                     <span className="value">{vehicle.Year} {vehicle.Model}</span>
                 </div>
                 <button onClick={() => { onBackClick(null); }}>Back to Garage</button>
+                <Link to={`/makes/${vehicle.Make.BrandName}`}>
+                    <Button variant="link">Make</Button>
+                </Link>
+
+                <Link to={`/bodytypes/${vehicle.BodyType.BodyName}`}>
+                    <Button variant="link">Type</Button>
+                </Link>
             </div>
         );
     }

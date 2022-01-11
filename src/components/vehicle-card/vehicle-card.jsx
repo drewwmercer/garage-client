@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Link } from "react-router-dom";
 
 export class VehicleCard extends React.Component {
     render() {
@@ -14,7 +15,10 @@ export class VehicleCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{vehicle.Nickname}</Card.Title>
                     <Card.Text>{vehicle.Make}</Card.Text>
-                    <Button onClick={() => onVehicleClick(vehicle)} variant="link">View</Button>
+
+                    <Link to={`/vehicles/${vehicle.Nickname}`}>
+                        <Button variant="link">View</Button>
+                    </Link>
                 </Card.Body>
             </Card>
         );
