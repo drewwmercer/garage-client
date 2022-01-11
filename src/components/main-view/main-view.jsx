@@ -47,6 +47,14 @@ export class MainView extends React.Component {
         this.getVehicles(authData.token);
     }
 
+    onLoggedOut() {
+        localStorage.removeItem('token');
+        localStorage.removeItem('owner');
+        this.setState({
+            owner: null
+        });
+    }
+
     getVehicles(token) {
         axios.get('https://my-garage-application.herokuapp.com/vehicles', {
             headers: { Authorization: `Bearer ${token}` }
@@ -71,20 +79,25 @@ export class MainView extends React.Component {
         if (vehicles.length === 0) return <div className="main-view" />;
 
         return (
-            <Row className='main-view justify-content-md-center'>
-                {selectedVehicle
-                    ? (
-                        <Col md={8}>
-                            <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
-                        </Col>
-                    )
-                    : vehicles.map(vehicle => (
-                        <Col md={3}>
-                            <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
-                        </Col>
-                    ))
-                }
-            </Row>
+            <div>
+                <Row className='main-view justify-content-md-center'>
+                    {selectedVehicle
+                        ? (
+                            <Col md={8}>
+                                <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
+                            </Col>
+                        )
+                        : vehicles.map(vehicle => (
+                            <Col md={3}>
+                                <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
+                            </Col>
+                        ))
+                    }
+                </Row>
+                <Row justify-content-md-center>
+                    <button onClick={() => { this.onLoggedOut() }}>Logout</button>
+                </Row>
+            </div>
         );
     }
 }
