@@ -14,7 +14,7 @@ export class VehicleCard extends React.Component {
                 <Card.Body>
                     <Card.Title>{vehicle.Nickname}</Card.Title>
                     <Card.Text>{vehicle.Make}</Card.Text>
-                    <Button onClick={() => onMovieClick(movie)} variant="link">Open</Button>
+                    <Button onClick={() => onVehicleClick(vehicle)} variant="link">View</Button>
                 </Card.Body>
             </Card>
         );

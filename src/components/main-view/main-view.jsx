@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
@@ -53,7 +55,13 @@ export class MainView extends React.Component {
         return (
             <div className='main-view'>
                 {selectedVehicle
-                    ? <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
+                    ? (
+                        <Row className="justify-content-md-center">
+                            <Col md={8}>
+                                <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
+                            </Col>
+                        </Row>
+                    )
                     : vehicles.map(vehicle => (
                         <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
                     ))
