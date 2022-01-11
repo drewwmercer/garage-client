@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
+import { LoginView } from '../login-view/login-view';
 import { VehicleCard } from '../vehicle-card/vehicle-card';
 import { VehicleView } from '../vehicle-view/vehicle-view';
 
@@ -11,7 +12,8 @@ export class MainView extends React.Component {
         this.state = {
             // Setting vehicles to an empty array
             vehicles: [],
-            selectedVehicle: null
+            selectedVehicle: null,
+            user: null
         }
     }
 
@@ -33,9 +35,17 @@ export class MainView extends React.Component {
         });
     }
 
+    onLoggedIn(user) {
+        this.setState({
+            user
+        });
+    }
+
     render() {
         // Destructuring the vehicle object with ES6
-        const { vehicles, selectedVehicle } = this.state;
+        const { vehicles, selectedVehicle, user } = this.state;
+
+        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
 
         if (vehicles.length === 0) return <div className="main-view" />;
 
