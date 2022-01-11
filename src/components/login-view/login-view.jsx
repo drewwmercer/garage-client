@@ -16,23 +16,27 @@ export function LoginView(props) {
         <Container>
             <Row>
                 <Col>
-                    <Form>
-                        <Form.Group controlId="formUsername">
-                            <Form.Label>Username:</Form.Label>
-                            <Form.Control type="text" onChange={e => setOwnername(e.target.value)} />
-                        </Form.Group>
+                    <CardGroup>
+                        <Card>
+                            <Card.Header>myGarage Login</Card.Header>
+                            <Form>
+                                <Form.Group controlId="formUsername">
+                                    <Form.Label>Username:</Form.Label>
+                                    <Form.Control type="text" onChange={e => setOwnername(e.target.value)} />
+                                </Form.Group>
 
-                        <Form.Group controlId="formPassword">
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
-                        </Form.Group>
-                        <Button variant="primary" type="submit" onClick={handleSubmit}>
-                            Sign In
-                        </Button>
-                    </Form>
+                                <Form.Group controlId="formPassword">
+                                    <Form.Label>Password:</Form.Label>
+                                    <Form.Control type="password" onChange={e => setPassword(e.target.value)} />
+                                </Form.Group>
+                                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                                    Sign In
+                                </Button>
+                            </Form>
+                        </Card>
+                    </CardGroup>
                 </Col>
             </Row>
-
         </Container>
     );
 }

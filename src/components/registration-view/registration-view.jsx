@@ -34,52 +34,62 @@ export function RegistrationView(props) {
         <Container>
             <Row>
                 <Col>
-                    <Form>
-                        <Form.Group>
-                            <Form.Label>Ownername:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={ownername}
-                                onChange={e => setUsername(e.target.value)}
-                                required
-                                placeholder="Enter an owner name"
-                            />
+                    <CardGroup>
+                        <Card>
+                            <Card.Header>myGarage Registration</Card.Header>
+                            <Form>
+                                <Form.Group>
+                                    <Form.Label>Ownername:</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={ownername}
+                                        onChange={e => setUsername(e.target.value)}
+                                        required
+                                        placeholder="Enter an owner name"
+                                    />
 
-                        </Form.Group>
+                                </Form.Group>
 
-                        <Form.Group>
-                            <Form.Label>Password:</Form.Label>
-                            <Form.Control
-                                type="password"
-                                value={password}
-                                onChange={e => setPassword(e.target.value)}
-                                placeholder="Set a Password"
-                                minLength="8"
-                            />
-                        </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Password:</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
+                                        placeholder="Set a Password"
+                                        minLength="8"
+                                    />
+                                </Form.Group>
 
-                        <Form.Group>
-                            <Form.Label>Email address:</Form.Label>
-                            <Form.Control
-                                type="email"
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                placeholder="Enter your email" />
-                        </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Email address:</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        value={email}
+                                        onChange={e => setEmail(e.target.value)}
+                                        placeholder="Enter your email"
+                                    />
+                                </Form.Group>
 
-                        <Form.Group>
-                            <Form.Label>Date of Birth:</Form.Label>
-                            <Form.Control
-                                type="text"
-                                value={dob}
-                                onChange={e => setDOB(e.target.value)}
-                                placeholder="Enter your DOB" />
-                        </Form.Group>
+                                <Form.Group>
+                                    <Form.Label>Date of Birth:</Form.Label>
+                                    <Form.Control
+                                        type="text"
+                                        value={dob}
+                                        onChange={e => setDOB(e.target.value)}
+                                        placeholder="Enter your DOB"
+                                    />
+                                </Form.Group>
 
-                        <Button variant="primary" type="submit" onClick={handleSubmit}>
-                            Register
-                        </Button>
-                    </Form>
+                                <Button
+                                    variant="primary"
+                                    type="submit"
+                                    onClick={handleSubmit}>
+                                    Register
+                                </Button>
+                            </Form>
+                        </Card>
+                    </CardGroup>
                 </Col>
             </Row>
 
