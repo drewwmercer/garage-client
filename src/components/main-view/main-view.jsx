@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import { LoginView } from '../login-view/login-view';
+import { RegistrationView } from '../registration-view/registration-view';
 import { VehicleCard } from '../vehicle-card/vehicle-card';
 import { VehicleView } from '../vehicle-view/vehicle-view';
 

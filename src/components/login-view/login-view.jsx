@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export function LoginView(props) {
     const [username, setUsername] = useState('');
@@ -13,16 +14,20 @@ export function LoginView(props) {
     };
 
     return (
-        <form>
-            <label>
-                Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <button type="submit" onClick={handleSubmit}>Submit</button>
-        </form>
+        <div>
+            <form>
+                <label>
+                    Username:
+                    <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
+                </label>
+                <label>
+                    Password:
+                    <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                </label>
+                <button type="submit" onClick={handleSubmit}>Submit</button>
+            </form>
+
+            {/* <Link to=''>Register a new Owner account</Link> */}
+        </div>
     );
 }
