@@ -53,20 +53,20 @@ export class MainView extends React.Component {
         if (vehicles.length === 0) return <div className="main-view" />;
 
         return (
-            <div className='main-view'>
+            <Row className='main-view justify-content-md-center'>
                 {selectedVehicle
                     ? (
-                        <Row className="justify-content-md-center">
-                            <Col md={8}>
-                                <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
-                            </Col>
-                        </Row>
+                        <Col md={8}>
+                            <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
+                        </Col>
                     )
                     : vehicles.map(vehicle => (
-                        <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
+                        <Col md={3}>
+                            <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
+                        </Col>
                     ))
                 }
-            </div>
+            </Row>
         );
     }
 }
