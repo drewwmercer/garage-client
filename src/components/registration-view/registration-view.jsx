@@ -1,36 +1,83 @@
 import React, { useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
+import PropTypes from 'prop-types';
+import axios from 'axios';
+
+import './registration-view.scss';
 
 export function RegistrationView(props) {
-    const [username, setUsername] = useState('');
+    const [ownername, setOwnername] = useState('');
     const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [DOB, setDOB] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(username, password);
-        /* Send a request to the server for authentication */
-        /* then call props.onLoggedIn(username) */
-        props.onLoggedIn(username);
+
+        axios.post('https://my-garage-application.herokuapp.com/owners', {
+            Ownername: ownername,
+            Password: password,
+            Email: email,
+            DOB: dob
+        }).then(
+            response => {
+                const data = response.data;
+                console.log(data);
+                window.open('/', '_self');
+            }).catch(e => {
+                console.log('There was an error registering the owner.');
+                alert('Registering the owner was unsuccessful.')
+            });
     };
 
     return (
-        <form>
-            <label>
-                Username:
-        <input type="text" value={username} onChange={e => setUsername(e.target.value)} />
-            </label>
-            <label>
-                Password:
-        <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
-            </label>
-            <label>
-                Email address:
-        <input type="text" value={email} onChange={e => setEmail(e.target.value)} />
-            </label>
-            <label>
-                Date of Birth:
-        <input type="text" value={DOB} onChange={e => setDOB(e.target.value)} />
-            </label>
-            <button type="submit" onClick={handleSubmit}>Register</button>
-        </form>
+        <Form>
+            <Form.Group>
+                <Form.Label>Ownername:</Form.Label>
+                <Form.Control
+                    type="text"
+                    value={ownername}
+                    // onChange{e => setUsername(e.target.value)}
+                    required
+                    placeholder="Enter an owner name"
+                />
+
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Password:</Form.Label>
+                <Form.Control
+                    type="password"
+                    placeholder="Password"
+                />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Email address:</Form.Label>
+                <Form.Control
+                    type="email"
+                    placeholder="Enter your email" />
+            </Form.Group>
+
+            <Form.Group>
+                <Form.Label>Date of Birth:</Form.Label>
+                <Form.Control
+                    type="dob"
+                    placeholder="Enter your DOB" />
+            </Form.Group>
+
+            <Button variant="primary" type="submit">
+                Register
+            </Button>
+        </Form>
     );
 }
+
+RegistrationView.propTypes = {
+    register: PropTypes.shape({
+        Ownername: PropTypes.string.isRequired,
+        Password: PropTypes.string.isRequired,
+        Email: PropTypes.string,
+        DOB: PropTypes.string
+    })
+};

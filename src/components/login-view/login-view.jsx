@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 export function LoginView(props) {
-    const [username, setUsername] = useState('');
+    const [username, setOwnername] = useState('');
     const [password, setPassword] = useState('');
 
     const handleSubmit = (e) => {
@@ -17,7 +17,7 @@ export function LoginView(props) {
         <Form>
             <Form.Group controlId="formUsername">
                 <Form.Label>Username:</Form.Label>
-                <Form.Control type="text" onChange={e => setUsername(e.target.value)} />
+                <Form.Control type="text" onChange={e => setOwnername(e.target.value)} />
             </Form.Group>
 
             <Form.Group controlId="formPassword">
