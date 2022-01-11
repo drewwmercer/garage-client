@@ -16,20 +16,18 @@ export class MainView extends React.Component {
             // Setting vehicles to an empty array
             vehicles: [],
             selectedVehicle: null,
-            user: null
+            owner: null
         }
     }
 
     componentDidMount() {
-        axios.get('https://my-garage-application.herokuapp.com/vehicles')
-            .then(response => {
-                this.setState({
-                    vehicles: response.data
-                });
-            })
-            .catch(error => {
-                console.log(error);
+        let accessToken = localStorage.getItem('token');
+        if (accessToken !== null) {
+            this.setState({
+                owner: localStorage.getItem('owner')
             });
+            this.getVehicles(accessToken);
+        }
     }
 
     setSelectedVehicle(newSelectedVehicle) {
@@ -38,17 +36,37 @@ export class MainView extends React.Component {
         });
     }
 
-    onLoggedIn(user) {
+    onLoggedIn(authData) {
+        console.log(authData);
         this.setState({
-            user
+            owner: authData.owner.Ownername
         });
+
+        localStorage.setItem('token', authData.token);
+        localStorage.setItem('owner', authData.owner.Ownername);
+        this.getVehicles(authData.token);
+    }
+
+    getVehicles(token) {
+        axios.get('https://my-garage-application.herokuapp.com/vehicles', {
+            headers: { Authorization: `Bearer ${token}` }
+        })
+            .then(response => {
+                // Assign the result to the state
+                this.setState({
+                    vehicles: response.data
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     render() {
         // Destructuring the vehicle object with ES6
-        const { vehicles, selectedVehicle, user } = this.state;
+        const { vehicles, selectedVehicle, owner } = this.state;
 
-        if (!user) return <LoginView onLoggedIn={user => this.onLoggedIn(user)} />;
+        if (!owner) return <LoginView onLoggedIn={owner => this.onLoggedIn(owner)} />;
 
         if (vehicles.length === 0) return <div className="main-view" />;
 
