@@ -6,15 +6,14 @@ import { Link } from "react-router-dom";
 
 export class VehicleCard extends React.Component {
     render() {
-        const { vehicle, onVehicleClick } = this.props;
+        const { vehicle } = this.props;
 
-        // return <div className="vehicle-card" onClick={() => { onVehicleClick(vehicle); }}>{vehicle.Nickname}</div>;
         return (
             <Card>
                 <Card.Img variant="top" src={vehicle.ImagePath} />
                 <Card.Body>
                     <Card.Title>{vehicle.Nickname}</Card.Title>
-                    <Card.Text>{vehicle.Make}</Card.Text>
+                    <Card.Text>{vehicle.Make.BrandName}</Card.Text>
 
                     <Link to={`/vehicles/${vehicle.Nickname}`}>
                         <Button variant="link">View</Button>
@@ -35,6 +34,5 @@ VehicleCard.propTypes = {
         Make: PropTypes.shape({
             BrandName: PropTypes.string.isRequired
         })
-    }).isRequired,
-    onVehicleClick: PropTypes.func.isRequired
+    }).isRequired
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Col, Row } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Redirect } from "react-router-dom";
 
 import VehiclesList from '../vehicles-list/vehicles-list';
 import { LoginView } from '../login-view/login-view';
@@ -46,11 +46,11 @@ export class MainView extends React.Component {
         }
     }
 
-    setSelectedVehicle(newSelectedVehicle) {
-        this.setState({
-            selectedVehicle: newSelectedVehicle
-        });
-    }
+    // setSelectedVehicle(newSelectedVehicle) {
+    //     this.setState({
+    //         selectedVehicle: newSelectedVehicle
+    //     });
+    // }
 
     onLoggedIn(authData) {
         console.log(authData);
@@ -73,60 +73,66 @@ export class MainView extends React.Component {
 
     render() {
         // Destructuring the vehicle object with ES6
-        const { vehicles, selectedVehicle, owner } = this.state;
-
-        if (!owner) return <Row>
-            <Col>
-                <LoginView onLoggedIn={owner => this.onLoggedIn(owner)} />
-            </Col>
-        </Row>
-
-        if (vehicles.length === 0) return <div className="main-view" />;
+        // const { vehicles, selectedVehicle, owner } = this.state;
+        const { vehicles, owner } = this.state;
 
         return (
             <Router>
-                <Row className='main-view justify-content-md-center'>
-                    {/* <Routes>
-                   
-                        <Route exact path="/" element={() => {
-                            return vehicles.map(v => (
-                                <Col md={3} key={v._id}>
-                                    <VehicleCard vehicle={v} />
-                                </Col>
-                            ))
-                        }} />
-                        <Route path="/vehicles/:vehicleId" element={({ match }) => {
-                            return <Col md={8}>
-                                <VehicleView vehicle={vehicles.find(v => v._id === match.params.vehicleId)} />
-                            </Col>
-                        }} />
-                    </Routes> */}
+                <Row className="main-view justify-content-md-center">
+                    {/* Old way */}
+                    {/* <Row>New Way:</Row> */}
+                    <Route exact path="/" render={() => {
+                        if (!owner) return (
+                            <LoginView onLoggedIn={owner => this.onLoggedIn(owner)} />
+                        );
 
-                    <Routes>
-                        <Route exact path="/" render={() => {
-                            if (!user) return <Col>
-                                <LoginView onLoggedIn={user => this.onLoggedIn(user)} />
-                            </Col>
-                            if (vehicles.length === 0) return <div className="main-view" />;
-                            return <VehiclesList vehicles={vehicles} />;
-                        }} />
-                    </Routes>
+                        if (vehicles.length === 0) return <div className="main-view" />;
 
-
-                    {selectedVehicle
-                        ? (
-                            <Col md={8}>
-                                <VehicleView vehicle={selectedVehicle} onBackClick={newSelectedVehicle => { this.setSelectedVehicle(newSelectedVehicle); }} />
-                            </Col>
+                        return (
+                            <div>
+                                <Row>
+                                    {vehicles.map(v => (
+                                        <Col md={3} key={v._id} className="justify-content-center p-4">
+                                            <VehicleCard vehicle={v} />
+                                        </Col>
+                                    ))}
+                                </Row>
+                            </div>
                         )
-                        : vehicles.map(vehicle => (
-                            <Col md={3}>
-                                <VehicleCard key={vehicle._id} vehicle={vehicle} onVehicleClick={(vehicle) => { this.setSelectedVehicle(vehicle) }} />
-                            </Col>
-                        ))
-                    }
-                </Row>
-                <Row justify-content-md-center>
+                    }} />
+
+                    <Route exact path="/vehicles/:Nickname" render={({ match, history }) => {
+                        if (!owner) return (
+                            <LoginView onLoggedIn={owner => this.onLoggedIn(owner)} />
+                        );
+
+                        if (vehicles.length === 0) return <div className="main-view" />;
+
+                        let vehicleByName = vehicles.find(vehicle => vehicle.Nickname === match.params.Nickname);
+                        if (!vehicleByName) {
+                            vehicleByName = {
+                                Nickname: '',
+                                Year: '',
+                                Make: [],
+                                BodyType: {},
+                                ImagePath: '',
+                                Active: true,
+                                Model: '',
+                                Trim: ''
+                            }
+                        }
+
+                        return (
+                            <Row>
+                                <Col md={8}>
+                                    <VehicleView vehicle={vehicleByName} onBackClick={() => history.goBack()} />
+                                </Col>
+                            </Row>
+                        );
+                    }}
+                    />
+                </Row >
+                <Row className="justify-content-md-center">
                     <button onClick={() => { this.onLoggedOut() }}>Logout</button>
                 </Row>
             </Router >

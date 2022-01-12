@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { Container, Row, Col, Button, Card, CardGroup } from 'react-bootstrap';
 import { Link } from "react-router-dom";
 
@@ -32,3 +33,20 @@ export class VehicleView extends React.Component {
         );
     }
 }
+
+VehicleView.propTypes = {
+    vehicle: PropTypes.shape({
+        Nickname: PropTypes.string.isRequired,
+        Description: PropTypes.string,
+        Year: PropTypes.string.isRequired,
+        Make: PropTypes.shape({
+            BrandName: PropTypes.string.isRequired,
+            About: PropTypes.string
+        }).isRequired,
+        ImagePath: PropTypes.string.isRequired,
+        Active: PropTypes.bool,
+        Model: PropTypes.string.isRequired,
+        Trim: PropTypes.string.isRequired
+    }).isRequired,
+    onBackClick: PropTypes.func.isRequired
+};
