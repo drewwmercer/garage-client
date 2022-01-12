@@ -8,6 +8,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { VehicleCard } from '../vehicle-card/vehicle-card';
 import { VehicleView } from '../vehicle-view/vehicle-view';
+import { Navbar } from '../navbar/navbar';
 
 export class MainView extends React.Component {
 
@@ -79,8 +80,6 @@ export class MainView extends React.Component {
         return (
             <Router>
                 <Row className="main-view justify-content-md-center">
-                    {/* Old way */}
-                    {/* <Row>New Way:</Row> */}
                     <Route exact path="/" render={() => {
                         if (!owner) return (
                             <LoginView onLoggedIn={owner => this.onLoggedIn(owner)} />
@@ -91,11 +90,17 @@ export class MainView extends React.Component {
                         return (
                             <div>
                                 <Row>
+                                    <Navbar />
+                                </Row>
+                                <Row>
                                     {vehicles.map(v => (
                                         <Col md={3} key={v._id} className="justify-content-center p-4">
                                             <VehicleCard vehicle={v} />
                                         </Col>
                                     ))}
+                                </Row>
+                                <Row className="justify-content-md-center">
+                                    <button onClick={() => { this.onLoggedOut() }}>Logout</button>
                                 </Row>
                             </div>
                         )
@@ -124,7 +129,7 @@ export class MainView extends React.Component {
 
                         return (
                             <Row>
-                                <Col md={8}>
+                                <Col md={8} className="p-4">
                                     <VehicleView vehicle={vehicleByName} onBackClick={() => history.goBack()} />
                                 </Col>
                             </Row>
@@ -132,13 +137,9 @@ export class MainView extends React.Component {
                     }}
                     />
                 </Row >
-                <Row className="justify-content-md-center">
-                    <button onClick={() => { this.onLoggedOut() }}>Logout</button>
-                </Row>
             </Router >
         );
     }
 }
-
 
 export default MainView;
