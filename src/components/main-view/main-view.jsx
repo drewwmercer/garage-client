@@ -15,7 +15,7 @@ export class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            // Setting vehicles to an empty array
+            // Setting some vehicles to an empty array
             vehicles: [],
             selectedVehicle: null,
             owner: null
