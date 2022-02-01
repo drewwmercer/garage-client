@@ -90,7 +90,7 @@ export class MainView extends React.Component {
                         return (
                             <div>
                                 <Row>
-                                    <Navbar />
+                                    <Navigation />
                                 </Row>
                                 <Row>
                                     {vehicles.map(v => (
