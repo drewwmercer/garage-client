@@ -3,7 +3,7 @@ import { Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
 
 import './navbar.scss'
 
-export class Navbar extends React.Component {
+export class Navigation extends React.Component {
     constructor() {
         super();
 
