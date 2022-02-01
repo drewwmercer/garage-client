@@ -8,7 +8,7 @@ import { LoginView } from '../login-view/login-view';
 import { RegistrationView } from '../registration-view/registration-view';
 import { VehicleCard } from '../vehicle-card/vehicle-card';
 import { VehicleView } from '../vehicle-view/vehicle-view';
-import { Navbar } from '../navbar/navbar';
+import { Navigation } from '../navbar/navbar';
 
 export class MainView extends React.Component {
 
